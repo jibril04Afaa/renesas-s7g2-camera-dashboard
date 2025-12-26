@@ -1,0 +1,10 @@
+si SWD
+speed 4000
+device R7FS7G27H
+connect
+r
+halt
+loadfile build/dk-s7g2.elf
+r
+g
+exit

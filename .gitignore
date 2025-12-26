@@ -1,8 +1,11 @@
 Debug/
 Release/
+build/
 *.elf
 *.map
 *.bin
+*.o
+*.lst
 .settings/
 .metadata/
 
