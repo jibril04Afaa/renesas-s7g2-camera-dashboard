@@ -8,5 +8,5 @@ void delay_cycles(uint32_t cycles) {
 }
 
 void bringup_run(void) {
-  // Later: clocks, pinmux, peripherals
+  // clocks, pinmux, peripherals
 }
