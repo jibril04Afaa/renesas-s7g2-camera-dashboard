@@ -1,29 +1,22 @@
 #include <stdint.h>
 
-extern uint32_t _end_text;
-extern uint32_t _start_data;
-extern uint32_t _end_data;
-extern uint32_t _start_bss;
-extern uint32_t _end_bss;
+extern uint32_t _sidata, _sdata, _edata;
+extern uint32_t _sbss, _ebss;
 
-int main(void);
+void Reset_Handler(void)
+{
+  uint32_t *src = &_sidata;
+  uint32_t *dst = &_sdata;
 
-void reset(void) {
-  // Copy .data from flash to RAM
-  uint32_t *src = &_end_text;
-  uint32_t *dst = &_start_data;
-  while (dst < &_end_data) {
-    *dst++ = *src++;
-  }
+  // copy .data from flash to RAM
+  while (dst < &_edata) *dst++ = *src++;
 
-  // Zero .bss
-  dst = &_start_bss;
-  while (dst < &_end_bss) {
-    *dst++ = 0;
-  }
+  // zero .bss
+  dst = &_sbss;
+  while (dst < &_ebss) *dst++ = 0;
 
-  (void)main();
+  main();
 
-  // If main returns, hang.
-  while (1) { }
+  while (1);
+
 }
